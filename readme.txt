@@ -21,3 +21,8 @@ then run:
 forge build
 
 5.Tests
+create and edite ./test/FundMeTest.t.sol file 
+run:
+forge test 
+forge test -vvv # specifies visibility of three logging
+
