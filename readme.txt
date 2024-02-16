@@ -21,10 +21,21 @@ then run:
 forge build
 
 5.Tests
-create and edite ./test/FundMeTest.t.sol file 
+create and edit ./test/FundMeTest.t.sol file 
 run:
 forge test 
 forge test -vvv # specifies visibility of three logging
 
 6.Debugging Tests I
+add:
+function testOwnerIsMsgSender() public
+to 
+FundMeTest.t.sol file 
+in 
+FundMeTest contract 
+
+7.Advanced Deploy Scripts I
+create DeployFundMe.s.sol file in script folder 
+run:
+forge script script/DeployFundMe.s.sol 
 
