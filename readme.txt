@@ -26,3 +26,5 @@ run:
 forge test 
 forge test -vvv # specifies visibility of three logging
 
+6.Debugging Tests I
+
