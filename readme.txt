@@ -58,6 +58,7 @@ reason:
 we are calling a contract address that do not exist,
 when we run forge test without rpc-url, it's going to spin up a new blank Anvil Chain,
 and run our test.
+
 what can we do to work out with addresses outside our system?
 Unit: testing a specific part of our system 
 Integration: testing how our code works with other part of our code 
@@ -74,7 +75,12 @@ echo $SEPOLIA_RPC_URL
 forge test --match-test testPriceFeedVersionIsAccurate -vvvvv --fork-url $SEPOLIA_RPC_URL
 forge coverage --fork-url $SEPOLIA_RPC_URL
 
-
-
+9.Refactoring I: Testing Deploy Scripts
+refactor FundMe.sol, PriceConverter.sol, DeployFundMe.s.sol, FundMeTest.t.sol four files. 
+make them modular deployments and modular testing.
+run:
+source .env 
+forge test -vvvvv --fork-url $SEPOLIA_RPC_URL
+forge test --match-test testOwnerIsMsgSender -vvvvv --fork-url $SEPOLIA_RPC_URL
 
 
