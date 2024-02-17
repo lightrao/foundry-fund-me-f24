@@ -84,3 +84,15 @@ forge test -vvvvv --fork-url $SEPOLIA_RPC_URL
 forge test --match-test testOwnerIsMsgSender -vvvvv --fork-url $SEPOLIA_RPC_URL
 
 
+10.Refactoring II: Helper Config
+we want to be able to do everything locally for as long as possible, and want to test on different chains.
+create and edit HelperConfig.s.sol file.
+edit DeployFundMe.s.sol file so we are not hardcode address.
+run:
+forge test --fork-url $SEPOLIA_RPC_URL
+
+edit .env file add MAINNET_RPC_URL from alchemy and run:
+source .env 
+forge test --fork-url $MAINNET_RPC_URL
+
+11.Refactoring III: Mocking
