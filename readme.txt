@@ -98,3 +98,11 @@ forge test --fork-url $MAINNET_RPC_URL
 11.Refactoring III: Mocking
 create ./test/mocks/MockV3Aggregator.sol file.
 deal with Anvil config in HelperConfig.s.sol file.
+run:
+source .env 
+forge test -vvvvv --fork-url $SEPOLIA_RPC_URL
+forge test -vvvvv --fork-url $MAINNET_RPC_URL
+forge test -vvvvv
+
+we can see contract calling chain:
+FundMeTest -> DeployFundMe -> HelperConfig -> MockV3Aggregator

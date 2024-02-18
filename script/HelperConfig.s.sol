@@ -28,7 +28,7 @@ contract HelperConfig is Script {
         } else if (block.chainid == 1) {
             activeNetworkConfig = getMainnetEthConfig();
         } else {
-            activeNetworkConfig = getAnvilEthConfig();
+            activeNetworkConfig = getOrCreateAnvilEthConfig();
         }
     }
 
@@ -50,8 +50,11 @@ contract HelperConfig is Script {
         return mainnetConfig;
     }
 
-    function getAnvilEthConfig() public returns (NetworkConfig memory) {
-        // price feed address
+    function getOrCreateAnvilEthConfig() public returns (NetworkConfig memory) {
+        // address default to address(0)
+        if (activeNetworkConfig.priceFeed != address(0)) {
+            return activeNetworkConfig;
+        }
 
         // 1. Deploy the mocks
         // 2. Return the mock address
@@ -63,6 +66,7 @@ contract HelperConfig is Script {
         vm.stopBroadcast();
 
         NetworkConfig memory anvilConfig = NetworkConfig({
+            // price feed address
             priceFeed: address(mockPriceFeed),
             chainid: 31337
         });
