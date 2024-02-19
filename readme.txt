@@ -106,3 +106,14 @@ forge test -vvvvv
 
 we can see contract calling chain:
 FundMeTest -> DeployFundMe -> HelperConfig -> MockV3Aggregator
+
+12.More Cheatcodes
+run: forge coverage
+now coverage percentile is low, so we need to add more test.
+edit FundMeTest and run: 
+forge test --match-test testFundFailsWithoutEnoughETH
+add some test and run:
+forge test --match-test testFundUpdatesFundedDataStructure
+forge coverage
+
+13.More Coverage
