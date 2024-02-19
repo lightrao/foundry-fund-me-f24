@@ -117,3 +117,12 @@ forge test --match-test testFundUpdatesFundedDataStructure
 forge coverage
 
 13.More Coverage
+add test code to FundMeTest.
+run:
+forge test --match-test testAddsFunderToArrayOfFunders
+forge test --match-test testOnlyOwnerCanWithdraw
+forge test --match-test testWithdrawWithASingleFunder
+forge test --match-test testWithdrawFromMultipleFunders
+forge coverage 
+
+14.Chisel
