@@ -100,20 +100,20 @@ contract FundMeTest is Test {
         // when you send a transaction you send a little bit more gas than you'er expected to use
         // you can see how much gas left base on how much gas you send by calling gasleft()
         uint256 gasStart = gasleft(); // gas we send to the transaction
-        console.log(gasStart);
+        console.log("gasStart", gasStart);
 
         vm.txGasPrice(GAS_PRICE); // cheatcodes: sets gasprice for the rest of the transaction
+        console.log("tx.gasprice", tx.gasprice);
         vm.prank(fundMe.getOwner());
         fundMe.withdraw(); // should have spent gas, for anvil gas price defaults to zero
 
         uint256 gasEnd = gasleft();
-        console.log(gasEnd);
+        console.log("gasEnd", gasEnd);
 
         uint256 gasUsed = (gasStart - gasEnd); // gas usage by withdraw() Txn
-        console.log(gasUsed);
+        console.log("gasUsed", gasUsed);
         uint256 transactionFee = gasUsed * tx.gasprice; // transaction fee from withdraw()
-        console.log(tx.gasprice);
-        console.log(transactionFee);
+        console.log("transactionFee", transactionFee);
 
         // Assert
         uint256 endingOwnerBalance = fundMe.getOwner().balance;

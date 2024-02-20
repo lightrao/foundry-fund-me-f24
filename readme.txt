@@ -159,3 +159,32 @@ edit FundMeTest set gas price, for anvil gas price defaults to zero.
 run:
 forge test --match-test testWithdrawWithASingleFunder -vvv
 
+16.Storage
+storage variables (global variables, state variables) take up spot in storgae.
+global number just take up a slot in storage, but global array and mapping need several sequential slots in storage 
+and should use hash function to map slots which store datas.
+constant and immutable variables do not take up storage slot, they are part of the bytecode of the contract.
+variables inside of function only exist the duration of the function, they add in memory but not storage, they are not persist or permanent.
+array and mapping need `memory` keyword to illustrate whether it in storage or memory location.
+string is dynamically sized array, so it need `memory` key word describe whether it in memory or storage location.
+
+add FunWithStorage.sol and DeployStorageFun.s.sol to the project.
+run:
+anvil 
+forge script script/DeployStorageFun.s.sol --rpc-url <anvil's rpc url> --private-key <anvil's account private key> --broadcast
+or run:
+forge inspect FunWithStorage storageLayout
+
+we can check FundMe contract storage.
+run:
+forge inspect FundMe storageLayout
+or open different terminal run:
+anvil 
+forge script script/DeployFundMe.s.sol --rpc-url <anvil's rpc url> --private-key <anvil's account private key> --broadcast
+cast storage <contract address> <storage slot index>
+or connet to ethersan, just run:
+cast storage <contract address>
+
+17.Gas: Cheaper Withdraw (continued)
+
+
