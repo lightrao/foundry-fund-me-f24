@@ -126,3 +126,36 @@ forge test --match-test testWithdrawFromMultipleFunders
 forge coverage 
 
 14.Chisel
+run: chisel
+open Chisel an advanced Solidity REPL shipped with Foundry.
+experiment chisel run:
+➜ !help 
+➜ uint256 cat = 1;
+➜ cat
+Type: uint256
+├ Hex: 0x0000000000000000000000000000000000000000000000000000000000000001
+├ Hex (full word): 0x0000000000000000000000000000000000000000000000000000000000000001
+└ Decimal: 1
+➜ uint256 catAndThree = cat + 3;
+➜ catAndThree
+Type: uint256
+├ Hex: 0x0000000000000000000000000000000000000000000000000000000000000004
+├ Hex (full word): 0x0000000000000000000000000000000000000000000000000000000000000004
+└ Decimal: 4
+ctrl + c quit REPL 
+
+15. Gas: Cheaper Withdraw
+view etherscan:
+Transaction Fee == Gas Usage by Txn * Gas Price
+Gas Price == Base Gas Fee + Max Priority Gas Fee
+Burnt Fee == Base Gas Fee * Gas Usage by Txn
+Txn Savings Fee == (Max Gas Fee - Gas Price) * Gas Usage by Txn
+
+how do we know how much gas will spend to call a function?
+run:
+forge snapshot --match-test testWithdrawFromMultipleFunders
+will create .gas-snapshot file and you can check it. 
+edit FundMeTest set gas price, for anvil gas price defaults to zero.
+run:
+forge test --match-test testWithdrawWithASingleFunder -vvv
+

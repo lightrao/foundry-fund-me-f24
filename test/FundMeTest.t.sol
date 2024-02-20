@@ -14,6 +14,7 @@ contract FundMeTest is Test {
 
     uint256 constant SEND_VALUE = 0.1 ether; // 1e17 Wei
     uint256 constant STARTING_BALANCE = 10 ether;
+    uint256 constant GAS_PRICE = 2;
 
     function setUp() external {
         // us -> fundMeTest -> fundMe
@@ -94,8 +95,25 @@ contract FundMeTest is Test {
         uint256 startingFundMeBalance = address(fundMe).balance;
 
         // Act
+
+        // tells you how much gas is left in your transaction call
+        // when you send a transaction you send a little bit more gas than you'er expected to use
+        // you can see how much gas left base on how much gas you send by calling gasleft()
+        uint256 gasStart = gasleft(); // gas we send to the transaction
+        console.log(gasStart);
+
+        vm.txGasPrice(GAS_PRICE); // cheatcodes: sets gasprice for the rest of the transaction
         vm.prank(fundMe.getOwner());
-        fundMe.withdraw();
+        fundMe.withdraw(); // should have spent gas, for anvil gas price defaults to zero
+
+        uint256 gasEnd = gasleft();
+        console.log(gasEnd);
+
+        uint256 gasUsed = (gasStart - gasEnd); // gas usage by withdraw() Txn
+        console.log(gasUsed);
+        uint256 transactionFee = gasUsed * tx.gasprice; // transaction fee from withdraw()
+        console.log(tx.gasprice);
+        console.log(transactionFee);
 
         // Assert
         uint256 endingOwnerBalance = fundMe.getOwner().balance;
