@@ -190,6 +190,19 @@ or connet to ethersan, just run:
 cast storage <contract address>
 
 17.Gas: Cheaper Withdraw (continued)
-start 
+reading and writing from storage is incredibly expensive operation, any time we do it we spend a lot of gas.
+view remix -> bytecode:
+object: contract in bytecode.
+opcodes: bytecode converted to something called opcodes, each opcode has a specific gas cost associated with it.
+SLOAD 100 gas to load word from storage 
+SSTORE 100 gas to save word to storage 
+MLOAD 3 gas to load word from memory
+MSTORE 3 gas to save word to memory 
 
+add cheaperWithdraw() to FundMe.
+add testWithdrawFromMultipleFundersCheaper() to FundMeTest.
+run:
+forge snapshot
+
+18.Interactions.s.sol
 
