@@ -160,7 +160,8 @@ run:
 forge test --match-test testWithdrawWithASingleFunder -vvv
 
 16.Storage
-storage variables (global variables, state variables) take up spot in storgae.
+storage variables (global variables, state variables) take up slot in storage, each slot is 32 bytes long, and represents the
+bytes version of the object.
 global number just take up a slot in storage, but global array and mapping need several sequential slots in storage 
 and should use hash function to map slots which store datas.
 constant and immutable variables do not take up storage slot, they are part of the bytecode of the contract.
@@ -169,18 +170,21 @@ array and mapping need `memory` keyword to illustrate whether it in storage or m
 string is dynamically sized array, so it need `memory` key word describe whether it in memory or storage location.
 
 add FunWithStorage.sol and DeployStorageFun.s.sol to the project.
-run:
+add ANVIL_RPC_URL and ANVIL_PRiVATE_KEY to .env file.
+open different terminal and run:
 anvil 
-forge script script/DeployStorageFun.s.sol --rpc-url <anvil's rpc url> --private-key <anvil's account private key> --broadcast
+souce .env 
+forge script script/DeployStorageFun.s.sol --rpc-url $ANVIL_RPC_URL --private-key $ANVIL_PRiVATE_KEY --broadcast
 or run:
 forge inspect FunWithStorage storageLayout
 
-we can check FundMe contract storage.
+we also can check FundMe contract storage.
 run:
 forge inspect FundMe storageLayout
 or open different terminal run:
 anvil 
-forge script script/DeployFundMe.s.sol --rpc-url <anvil's rpc url> --private-key <anvil's account private key> --broadcast
+source .env
+forge script script/DeployFundMe.s.sol --rpc-url $ANVIL_RPC_URL --private-key $ANVIL_PRiVATE_KEY --broadcast
 cast storage <contract address> <storage slot index>
 or connet to ethersan, just run:
 cast storage <contract address>
