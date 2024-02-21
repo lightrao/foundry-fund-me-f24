@@ -174,7 +174,7 @@ add ANVIL_RPC_URL and ANVIL_PRiVATE_KEY to .env file.
 open different terminal and run:
 anvil 
 souce .env 
-forge script script/DeployStorageFun.s.sol --rpc-url $ANVIL_RPC_URL --private-key $ANVIL_PRiVATE_KEY --broadcast
+forge script script/DeployStorageFun.s.sol --rpc-url $ANVIL_RPC_URL --private-key $FIRST_ANVIL_PRIVATE_KEY --broadcast
 or run:
 forge inspect FunWithStorage storageLayout
 
@@ -184,7 +184,7 @@ forge inspect FundMe storageLayout
 or open different terminal run:
 anvil 
 source .env
-forge script script/DeployFundMe.s.sol --rpc-url $ANVIL_RPC_URL --private-key $ANVIL_PRiVATE_KEY --broadcast
+forge script script/DeployFundMe.s.sol --rpc-url $ANVIL_RPC_URL --private-key $FIRST_ANVIL_PRIVATE_KEY --broadcast
 cast storage <contract address> <storage slot index>
 or connet to ethersan, just run:
 cast storage <contract address>
@@ -205,6 +205,24 @@ run:
 forge snapshot
 
 18.Interactions.s.sol
-let's go.
+we are going to do integration test. 
+create Interactions.s.sol in script folder.
+for keeping track of most recently deployed version of contract, we should install a tool, run:
+forge install Cyfrin/foundry-devops --no-commit
+in foundry you can run bash scripts or other types of scripts, for this add:
+ffi = true
+fs_permissions = [{ access = "read", path = "./broadcast" }]
+to:
+foundry.toml 
+this allow foundry to run commands directly on your machine.
+add fund and withdraw function to the script file, we can run script with command:
+source .env
+forge script script/Interactions.s.sol:FundFundMe --rpc-url $ANVIL_RPC_URL --private-key $FIRST_ANVIL_PRIVATE_KEY --broadcast -vvvvv
 
+create InterationsTest.t.sol file and run:
+forge test --match-test testUserCanFundInteractions
+forge test 
+source .env 
+forge test --fork-url $SEPOLIA_RPC_URL
 
+19.Makefile
