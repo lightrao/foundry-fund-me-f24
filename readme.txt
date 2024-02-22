@@ -217,10 +217,11 @@ foundry.toml
 this allow foundry to run commands directly on your machine.
 add fund and withdraw function to the script file, we can run script with command:
 source .env
-forge script script/Interactions.s.sol:FundFundMe --rpc-url $ANVIL_RPC_URL --private-key $FIRST_ANVIL_PRIVATE_KEY --broadcast -vvvvv
+forge script script/Interactions.s.sol:FundFundMe --rpc-url $ANVIL_RPC_URL --private-key $FIRST_ANVIL_PRIVATE_KEY --broadcast -vvv
+forge script script/Interactions.s.sol:WithdrawFundMe --rpc-url $ANVIL_RPC_URL --private-key $FIRST_ANVIL_PRIVATE_KEY --broadcast -vvv
 
 create InterationsTest.t.sol file and run:
-forge test --match-test testUserCanFundInteractions
+forge test --match-test testUserCanFundAndOwnerWithdraw
 forge test 
 source .env 
 forge test --fork-url $SEPOLIA_RPC_URL
