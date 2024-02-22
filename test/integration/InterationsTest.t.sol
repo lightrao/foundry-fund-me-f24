@@ -24,7 +24,12 @@ contract IteractionsTest is Test {
 
     function testUserCanFundInteractions() public {
         FundFundMe fundFundMe = new FundFundMe();
+        vm.prank(USER);
+        vm.deal(USER, 1e18);
         fundFundMe.fundFundMe(address(fundMe));
+
+        address funder = fundMe.getFunder(0);
+        assertEq(funder, USER);
 
         WithdrawFundMe withdrawFundMe = new WithdrawFundMe();
         withdrawFundMe.withdrawFundMe(address(fundMe));
