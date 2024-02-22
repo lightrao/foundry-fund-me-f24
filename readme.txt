@@ -227,3 +227,18 @@ source .env
 forge test --fork-url $SEPOLIA_RPC_URL
 
 19.Makefile
+makefiles allow us to create shortcuts for commands commonly use.
+install makefile, please run:
+sudo apt install make -y
+make --version
+create a new file named Makefile after add some content to it then run:
+make build 
+make deploy-sepolia
+
+After deploying to a testnet or local net, you can using cast to interact with contract,
+for example <FUNDME_CONTRACT_ADDRESS> is 0x5f23C5BdD497924B041A3c274D1E60df1dDF8471 then run:
+source .env 
+cast send 0x5f23C5BdD497924B041A3c274D1E60df1dDF8471 "fund()" --value 0.1ether --rpc-url $SEPOLIA_RPC_URL --private-key $SEPOLIA_PRIVATE_KEY
+cast send 0x5f23C5BdD497924B041A3c274D1E60df1dDF8471 "withdraw()"  --rpc-url $SEPOLIA_RPC_URL --private-key $SEPOLIA_PRIVATE_KEY
+
+20.Pushing to GitHub
