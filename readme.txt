@@ -241,4 +241,7 @@ source .env
 cast send 0x5f23C5BdD497924B041A3c274D1E60df1dDF8471 "fund()" --value 0.1ether --rpc-url $SEPOLIA_RPC_URL --private-key $SEPOLIA_PRIVATE_KEY
 cast send 0x5f23C5BdD497924B041A3c274D1E60df1dDF8471 "withdraw()"  --rpc-url $SEPOLIA_RPC_URL --private-key $SEPOLIA_PRIVATE_KEY
 
+synchronizing your local branch master with the remote branch master, and also for getting all the tags from the remote repository:
+git pull --tags origin master
+
 20.Pushing to GitHub
