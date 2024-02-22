@@ -245,3 +245,26 @@ synchronizing your local branch master with the remote branch master, and also f
 git pull --tags origin master
 
 20.Pushing to GitHub
+edit .gitignore file.
+useful command:
+git status
+git init -b main 
+ls
+pwd 
+git add .
+git status 
+git log # type q to quit
+git commit -m 'some info'
+git config user.name "username"
+git config user.email "useremail"
+mkdir folderName
+git clone <REMOTE_URL> folderName 
+
+after create a new repo on github, we can run:
+git remote add origin <REMOTE_URL>
+git remote -v
+git push -u origin main 
+git push --set-upstream origin main 
+
+21.Recap
+

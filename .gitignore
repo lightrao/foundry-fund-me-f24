@@ -16,8 +16,8 @@ docs/
 # other
 /src/typeExercise.sol
 
-broadcast 
+broadcast/
 
-lib
+lib/
 
 
