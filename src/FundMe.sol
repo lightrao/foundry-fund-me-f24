@@ -11,7 +11,7 @@ error FundMe__NotOwner();
 
 /**
  * @title A sample Funding Contract
- * @author Patrick Collins
+ * @author Light Rao
  * @notice This contract is for creating a sample funding contract
  * @dev This implements price feeds as our library
  */
@@ -62,6 +62,7 @@ contract FundMe {
     }
 
     function withdraw() public onlyOwner {
+        // reset datastructure
         for (
             uint256 funderIndex = 0;
             funderIndex < s_funders.length;
@@ -71,6 +72,8 @@ contract FundMe {
             s_addressToAmountFunded[funder] = 0;
         }
         s_funders = new address[](0);
+
+        // do withdrawing
         // Transfer vs call vs Send
         // payable(msg.sender).transfer(address(this).balance);
         (bool success, ) = i_owner.call{value: address(this).balance}("");
@@ -78,6 +81,7 @@ contract FundMe {
     }
 
     function cheaperWithdraw() public onlyOwner {
+        // reset datastructure try best to avoid using storage variable
         address[] memory funders = s_funders;
         // mappings can't be in memory, sorry!
         for (
@@ -89,6 +93,8 @@ contract FundMe {
             s_addressToAmountFunded[funder] = 0;
         }
         s_funders = new address[](0);
+
+        // do withdrawing
         // payable(msg.sender).transfer(address(this).balance);
         (bool success, ) = i_owner.call{value: address(this).balance}("");
         require(success);
