@@ -52,7 +52,7 @@ add
 function testOwnerIsMsgSender() public
 ```
 
-into FundMeTest.t.sol file which in FundMeTest contract.
+into FundMeTest contract which in FundMeTest.t.sol file.
 
 ## 7. Advanced Deploy Scripts I
 
@@ -92,16 +92,11 @@ Traces:
 
 reason:
 we are calling a contract address that do not exist. when we run forge test without rpc-url, it's going to spin up a new blank Anvil Chain which run our test.
-<br/>
+
 what can we do to work out with addresses outside our system?
 
-- Unit: testing a specific part of our system
-- Integration: testing how our code works with other part of our code
-- Forked: test our code on a simulated real environment
-- Staging: test our code in a real environment that is not prod
-
 one thing we can do is:
-create and edit .env file. we will spin up Anvil, but it'll simulate all transactions as if they're running on the sepolia chain, by running:
+create and edit .env file. then we will spin up Anvil, but it'll simulate all transactions as if they're running on the sepolia chain, by running:
 
 ```bash
 source .env
@@ -111,6 +106,13 @@ echo $SEPOLIA_RPC_URL
 forge test --match-test testPriceFeedVersionIsAccurate -vvvvv --fork-url $SEPOLIA_RPC_URL
 forge coverage --fork-url $SEPOLIA_RPC_URL
 ```
+
+Type of testing:
+
+- Unit: testing a specific part of our system
+- Integration: testing how our code works with other part of our code
+- Forked: test our code on a simulated real environment
+- Staging: test our code in a real environment that is not production
 
 ## 9. Refactoring I: Testing Deploy Scripts
 
@@ -162,7 +164,7 @@ run:
 forge coverage
 ```
 
-now coverage percentile is low, so we need to add more test.
+now test coverage percentile is low, so we need to add more test.
 edit FundMeTest and run:
 
 ```bash
@@ -249,7 +251,7 @@ array and mapping need `memory` keyword to illustrate whether it in storage or m
 string is dynamically sized array, so it need `memory` key word describe whether it in memory or storage location.
 
 add FunWithStorage.sol and DeployStorageFun.s.sol to the project.
-add ANVIL_RPC_URL and ANVIL_PRiVATE_KEY to .env file.
+add ANVIL_RPC_URL and ANVIL_PRIVATE_KEY to .env file.
 open different terminal and run:
 
 ```bash
@@ -331,7 +333,7 @@ foundry.toml
 ```
 
 this allow foundry to run commands directly on your machine.
-add fund and withdraw function to the script file, we can run script with command:
+add `fund` and `withdraw` contract to the script file, we can run script with command:
 
 ```bash
 source .env
