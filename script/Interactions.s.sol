@@ -44,3 +44,19 @@ contract WithdrawFundMe is Script {
         withdrawFundMe(mostRecentlyDeployed);
     }
 }
+
+contract ViewContractBalance is Script {
+    function viewBalance(address mostRecentlyDeployed) public view {
+        uint256 balance = mostRecentlyDeployed.balance;
+        console.log("The balance of FundMe is: %s", balance);
+    }
+
+    function run() external view {
+        // look inside of broadcast folder based of chainid, picks run-lastest.json and grabs most recently deployed contract
+        address mostRecentlyDeployed = DevOpsTools.get_most_recent_deployment(
+            "FundMe",
+            block.chainid
+        );
+        viewBalance(mostRecentlyDeployed);
+    }
+}
